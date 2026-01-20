@@ -1,0 +1,7 @@
+{
+  "name": "WanderLingo - Travel English Adventure",
+  "description": "A daily travel English learning app that prepares you for your next journey with 5 words and 5 sentences, featuring interactive quizzes and AI-powered pronunciation.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
