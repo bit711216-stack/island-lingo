@@ -2,8 +2,6 @@
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { DailyLesson } from "../types";
 
-const API_KEY = process.env.API_KEY || "";
-
 // Custom base64 decoder
 function decodeBase64(base64: string): Uint8Array {
   const binaryString = atob(base64);
@@ -36,7 +34,8 @@ async function decodeAudioData(
 }
 
 export const fetchDailyLesson = async (): Promise<DailyLesson> => {
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
+  // Always use process.env.API_KEY directly when initializing the GoogleGenAI client instance
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const today = new Date().toLocaleDateString();
   
   // 날짜를 포함하여 매번 새로운 주제를 유도하는 프롬프트
@@ -99,7 +98,8 @@ export const fetchDailyLesson = async (): Promise<DailyLesson> => {
 };
 
 export const speakText = async (text: string): Promise<void> => {
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
+  // Always use process.env.API_KEY directly when initializing the GoogleGenAI client instance
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash-preview-tts",
     contents: [{ parts: [{ text: `Say clearly: ${text}` }] }],
